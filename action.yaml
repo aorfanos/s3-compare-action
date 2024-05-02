@@ -34,22 +34,14 @@ inputs:
     required: true
     default: ""
 runs:
-  using: "composite"
-  steps:
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        repository: aorfanos/s3-compare-action
-
-    - name: Export poetry config to requirements
-      shell: bash
-      run: |
-        ls -lah
-        curl -sSL https://install.python-poetry.org | python3 -
-        poetry install
-        source .venv/bin/activate
-        python s3-compare-action.py
+  using: "docker"
+  image: 'Dockerfile'
+  env:
+    - INPUT_ACCESS_KEY_ID: ${{ input.access_key_id }}
+    - INPUT_BUCKET_NAME: ${{ input.bucket_name }}
+    - INPUT_BUCKET_ENDPOINT: ${{ input.bucket_endpoint }}
+    - INPUT_BUCKET_PATH: ${{ input.bucket_path }}
+    - INPUT_LOCAL_PATH: ${{ input.local_path }}
+    - INPUT_MAX_KEYS: ${{ input.max_keys }}
+    - INPUT_REGION: ${{ input.region }}
+    - INPUT_SECRET_ACCESS_KEY: ${{ input.secret_access_key }}
