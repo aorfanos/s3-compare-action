@@ -36,26 +36,17 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout action code
+      uses: actions/checkout@v4
+
     - name: Set up python
       id: setup-python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
-    - name: Install and configure Poetry
-      uses: snok/install-poetry@v1
-
-    #----------------------------------------------
-    #       load cached venv if cache exists
-    #----------------------------------------------
-    - name: Load cached venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: .venv
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-
     - name: Run comparison
       shell: bash
       run: |
-        poetry run python action.py
+        ls -lah
+        python -m poetry run python action.py
