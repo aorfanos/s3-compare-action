@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "read-from-r2-action"
+version = "0.1.0"
+description = ""
+authors = ["Alexandros Orfanos <me@aorfanos.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+boto3 = "^1.34.96"
+pre-commit = "^3.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
