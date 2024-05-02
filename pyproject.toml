@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "read-from-r2-action"
+name = "s3-compare-action"
 version = "0.1.0"
-description = ""
-authors = ["Alexandros Orfanos <me@aorfanos.com>"]
+description = "Compare differences between S3 and Github repo/local directory"
+authors = ["Alexandros Orfanos <github@aorfanos.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
