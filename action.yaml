@@ -38,6 +38,8 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        repository: aorfanos/s3-compare-action
 
     - name: Export poetry config to requirements
       shell: bash
