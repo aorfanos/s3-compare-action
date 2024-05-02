@@ -15,6 +15,6 @@ RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 
 COPY s3-compare-action.py ./s3-compare-action
 
-RUN poetry install
+# RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "python", "-m", "s3-compare-action"]
+ENTRYPOINT ["poetry", "run", "python", "./s3-compare-action"]
