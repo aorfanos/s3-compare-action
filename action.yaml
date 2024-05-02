@@ -60,6 +60,7 @@ runs:
     #----------------------------------------------
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      shell: bash
       run: poetry install --no-interaction
 
     - name: Compare S3 objects to local repo path
