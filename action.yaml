@@ -1,0 +1,69 @@
+name: "Compare S3 objects to local directory action"
+description: "Compare a remote path from S3 to a local GitHub repo path"
+inputs:
+  access_key_id:
+    description: "S3 or compatible access key ID"
+    required: true
+    default: ""
+  bucket_name:
+    description: "Bucket name"
+    required: true
+    default: ""
+  bucket_endpoint:
+    description: "The S3 or compatible endpoint to connect to"
+    required: true
+    default: ""
+  bucket_path:
+    description: "The path in the bucket that will be compared to local"
+    required: true
+    default: ""
+  local_path:
+    description: "The local path to compare with bucket path"
+    required: true
+    default: ""
+  max_keys:
+    description: "boto3 maxKeys setting (int) - increase or decrease at will"
+    required: false
+    default: 50
+  region:
+    description: "The S3 bucket region"
+    required: true
+    default: ""
+  secret_access_key:
+    description: "The secret access key used to authenticate to the bucket"
+    required: true
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - name: Set up python
+      id: setup-python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install and configure Poetry
+      uses: snok/install-poetry@v1
+
+    #----------------------------------------------
+    #       load cached venv if cache exists
+    #----------------------------------------------
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+    #----------------------------------------------
+    # install dependencies if cache does not exist
+    #----------------------------------------------
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction
+
+    - name: Compare S3 objects to local repo path
+      shell: bash
+      run: |
+        source .venv/bin/activate
+        python action.py
