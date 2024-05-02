@@ -36,17 +36,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout action code
-      uses: actions/checkout@v4
-
-    - name: Set up python
-      id: setup-python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-
-    - name: Run comparison
+    - name: Export poetry config to requirements
       shell: bash
       run: |
-        ls -lah
-        python -m poetry run python action.py
+        python -m poetry export --without-hashes --format=requirements.txt > requirements.txt
+        pip install -r requirements.txt
+        python action.py
