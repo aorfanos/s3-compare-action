@@ -33,6 +33,10 @@ inputs:
     description: "The secret access key used to authenticate to the bucket"
     required: true
     default: ""
+outputs:
+  file-difference:
+    description: "Will show files that are present on the remote, but absent locally"
+    value: ${{ steps.comparison.outputs.difference }}
 runs:
   using: "composite"
   steps:
@@ -45,6 +49,7 @@ runs:
       run: |
         pip install boto3
     - name: run script
+      id: comparison
       shell: bash
       run: |
         curl -O https://raw.githubusercontent.com/aorfanos/s3-compare-action/main/s3-compare-action.py
