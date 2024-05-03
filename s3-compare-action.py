@@ -42,7 +42,7 @@ s3 = boto3.client(
 # read bucket contents
 # ref: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/list_objects_v2.html
 object_information = s3.list_objects_v2(
-    Bucket=bucket_name, Prefix=bucket_path, Delimiter="/", MaxKeys=int(max_keys)
+    Bucket=str(bucket_name), Prefix=bucket_path, Delimiter="/", MaxKeys=int(max_keys)
 )
 
 # get bucket file names
