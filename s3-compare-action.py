@@ -21,6 +21,9 @@ region = os.environ.get(
 )  # Must be one of: wnam, enam, weur, eeur, apac, auto
 secret_access_key = os.environ.get("INPUT_SECRET_ACCESS_KEY")
 
+# debug
+print(f"{bucket_name}\n{local_path}")
+
 # create a set to store bucket contents/filenames
 BucketContents = set()
 
