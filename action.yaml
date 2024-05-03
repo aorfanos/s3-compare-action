@@ -51,11 +51,11 @@ runs:
         python s3-compare-action.py
         rm s3-compare-action.py
       env:
-        INPUT_ACCESS_KEY_ID: ${{ input.access_key_id }}
-        INPUT_BUCKET_NAME: ${{ input.bucket_name }}
-        INPUT_BUCKET_ENDPOINT: ${{ input.bucket_endpoint }}
-        INPUT_BUCKET_PATH: ${{ input.bucket_path }}
-        INPUT_LOCAL_PATH: ${{ input.local_path }}
-        INPUT_MAX_KEYS: ${{ input.max_keys }}
-        INPUT_REGION: ${{ input.region }}
-        INPUT_SECRET_ACCESS_KEY: ${{ input.secret_access_key }}
+        INPUT_ACCESS_KEY_ID: ${{ inputs.access_key_id }}
+        INPUT_BUCKET_NAME: ${{ inputs.bucket_name }}
+        INPUT_BUCKET_ENDPOINT: ${{ inputs.bucket_endpoint }}
+        INPUT_BUCKET_PATH: ${{ inputs.bucket_path }}
+        INPUT_LOCAL_PATH: ${{ inputs.local_path }}
+        INPUT_MAX_KEYS: ${{ inputs.max_keys }}
+        INPUT_REGION: ${{ inputs.region }}
+        INPUT_SECRET_ACCESS_KEY: ${{ inputs.secret_access_key }}
