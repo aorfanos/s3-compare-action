@@ -46,4 +46,7 @@ runs:
         pip install boto3
     - name: run script
       shell: bash
-      run: python s3-compare-action.py
+      run: |
+        curl -O https://raw.githubusercontent.com/aorfanos/s3-compare-action/main/s3-compare-action.py
+        python s3-compare-action.py
+        rm s3-compare-action.py
