@@ -57,4 +57,4 @@ for file in local_files:
 diff = BucketContents.difference(LocalContents)
 
 # set GH output to differences list
-os.environ["GITHUB_OUTPUT"] = json.dumps(list(diff))
+os.environ["GITHUB_OUTPUT"] = f"difference={json.dumps(list(diff))}"
